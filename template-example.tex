@@ -1,0 +1,82 @@
+\documentclass[a4paper,oneside]{article}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\renewcommand{\familydefault}{\ttdefault}
+\usepackage[paper=a4paper,top=0pt,bottom=0pt,right=0pt,left=0pt]{geometry}
+\usepackage{pdfpages}
+\usepackage[overlay]{textpos}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+\usepackage{setspace}
+
+% spazio dall'alto, da sx, larghezza textbox, testo. Tutto in millimetri.
+\newcommand{\text}[4]{\begin{textblock}{#3}(#2,#1)
+{\large #4}
+\end{textblock}}
+\newcommand{\insertpage}[1]{\begin{textblock*}{297mm}(0pt,0pt)%
+		\includepdf[pages=#1,scale=1]{T-MOD-SIR.pdf}%
+	\end{textblock*}%
+}
+
+
+\begin{document}
+	\insertpage{1}
+	% Part 1 - General information
+	\text{82}{43}{32}{Rossi} % surname
+	\text{82}{108}{20}{Mario} % name
+	\text{82}{169}{20}{s123456} % id
+	\text{96}{43}{10}{31} % dd
+	\text{96}{52}{10}{01} % mm
+	\text{96}{60}{10}{1970} % yyyy
+	\text{86}{112}{20}{\begin{flushright}Da qualche parte\end{flushright} % place of birth
+	}
+	\text{96}{170}{20}{Italia} % country
+	\text{109}{43}{63}{555 666 7777} % mobile phone
+	\text{109}{129}{63}{s123456@studenti.polimi.exe} % email
+	
+	\text{118}{110}{20}{DISAT} % department
+	\text{116}{170}{20}{\small Corso Duca} % headquarters
+	\text{119}{168}{20}{\small degli Abruzzi}
+	\text{122}{170}{20}{\small 24}
+	\text{127}{110}{80}{Esempio Uno} % department manager
+	\text{136}{110}{80}{Esempio Due} % laboratory manager
+
+	\text{157}{104}{80}{\Large X} % job
+	\text{183}{58}{45}{01/01/2017} % start date
+	\text{183}{160}{45}{31/12/2017} % end date
+	
+	% Part 1 - Workplace information
+	\text{215}{85}{130}{DISAT} % department
+	
+	\text{223}{85}{130}{Laboratorio di esempio} % room name
+	\text{228}{85}{80}{\Large X} % room type
+	\text{230}{44}{130}{AAA123} % room code
+	
+	\text{237}{85}{130}{Magazzino di esempio} % room name
+	\text{241}{136}{80}{\Large X} % room type
+	\text{245}{136}{130}{Magazzino} % room type (other)
+	\text{244}{44}{130}{BBB456} % room code
+	
+	\newpage
+	\insertpage{2}
+	
+	\newpage
+	\insertpage{3}
+	
+	\newpage
+	\insertpage{4}
+	
+	\newpage
+	\insertpage{5}
+	
+	\newpage
+	\insertpage{6}
+	
+	\newpage
+	\insertpage{7}
+	
+	\newpage
+	\insertpage{8}
+\end{document}
