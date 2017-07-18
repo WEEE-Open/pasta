@@ -1,0 +1,6 @@
+*.aux
+*.log
+*.synctex.gz
+*.pdf
+template.tex
+data.csv
