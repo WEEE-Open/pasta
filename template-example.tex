@@ -1,17 +1,16 @@
-\documentclass[a4paper,oneside]{article}
+\documentclass[a4paper]{article}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-\renewcommand{\familydefault}{\ttdefault}
+\renewcommand{\familydefault}{\ttdefault} % typewriter font
 \usepackage[paper=a4paper,top=0pt,bottom=0pt,right=0pt,left=0pt]{geometry}
-\usepackage{pdfpages}
-\usepackage[overlay]{textpos}
+\usepackage{pdfpages} % import pdf pages
+\usepackage[overlay]{textpos} % floating text
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{1mm}
-\usepackage{setspace}
 
-% spazio dall'alto, da sx, larghezza textbox, testo. Tutto in millimetri.
+% distance from top of page, from left, text box width, text. Everything is in millimeters.
 \newcommand{\text}[4]{\begin{textblock}{#3}(#2,#1)
 {\large #4}
 \end{textblock}}
