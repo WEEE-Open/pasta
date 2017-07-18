@@ -9,6 +9,8 @@
 \usepackage[overlay]{textpos} % floating text
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{1mm}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0em}
 
 % distance from top of page, from left, text box width, text. Everything is in millimeters.
 \newcommand{\text}[4]{\begin{textblock}{#3}(#2,#1)
@@ -23,46 +25,59 @@
 \begin{document}
 	\insertpage{1}
 	% Part 1 - General information
-	\text{82}{43}{32}{Rossi} % surname
-	\text{82}{108}{20}{Mario} % name
-	\text{82}{169}{20}{s123456} % id
-	\text{96}{43}{10}{31} % dd
-	\text{96}{52}{10}{01} % mm
-	\text{96}{60}{10}{1970} % yyyy
-	\text{86}{112}{20}{\begin{flushright}Da qualche parte\end{flushright} % place of birth
-	}
-	\text{96}{170}{20}{Italia} % country
-	\text{109}{43}{63}{555 666 7777} % mobile phone
-	\text{109}{129}{63}{s123456@studenti.polimi.exe} % email
+	\text{82}{48}{32}{Rossi} % surname
+	\text{82}{114}{20}{Mario} % name
+	\text{82}{174}{20}{s123456} % id
+	\text{96}{49}{10}{31} % dd
+	\text{96}{58}{10}{01} % mm
+	\text{96}{67}{10}{1970} % yyyy
+	\text{89}{113}{20}{Da\\qualche\\parte} % place of birth
+	\text{96}{174}{20}{Italia} % country
+	\text{109}{49}{63}{555 666 7777} % mobile phone
+	\text{109}{135}{63}{s123456@studenti.polimi.exe} % email
 	
-	\text{118}{110}{20}{DISAT} % department
-	\text{116}{170}{20}{\small Corso Duca} % headquarters
-	\text{119}{168}{20}{\small degli Abruzzi}
-	\text{122}{170}{20}{\small 24}
-	\text{127}{110}{80}{Esempio Uno} % department manager
-	\text{136}{110}{80}{Esempio Due} % laboratory manager
+	\text{118}{115}{20}{DISAT} % department
+	\text{116}{175}{20}{\small Corso Duca} % headquarters
+	\text{119}{173}{20}{\small degli Abruzzi}
+	\text{122}{175}{20}{\small 24}
+	\text{127}{115}{80}{Esempio Uno} % department manager
+	\text{136}{115}{80}{Esempio Due} % laboratory manager
 
-	\text{157}{104}{80}{\Large X} % job
-	\text{183}{58}{45}{01/01/2017} % start date
-	\text{183}{160}{45}{31/12/2017} % end date
+	\text{157}{109}{80}{\Large X} % job
+	\text{183}{63}{45}{01/01/2017} % start date
+	\text{183}{165}{45}{31/12/2017} % end date
 	
 	% Part 1 - Workplace information
-	\text{215}{85}{130}{DISAT} % department
+	\text{215}{90}{130}{DISAT} % department
 	
-	\text{223}{85}{130}{Laboratorio di esempio} % room name
-	\text{228}{85}{80}{\Large X} % room type
-	\text{230}{44}{130}{AAA123} % room code
+	\text{223}{90}{130}{Laboratorio di esempio} % room name
+	\text{228}{90}{80}{\Large X} % room type
+	\text{230}{49}{130}{AAA123} % room code
 	
-	\text{237}{85}{130}{Magazzino di esempio} % room name
-	\text{241}{136}{80}{\Large X} % room type
-	\text{245}{136}{130}{Magazzino} % room type (other)
-	\text{244}{44}{130}{BBB456} % room code
+	\text{237}{90}{130}{Magazzino di esempio} % room name
+	\text{241}{141}{80}{\Large X} % room type
+	\text{245}{141}{130}{Magazzino} % room type (other)
+	\text{244}{49}{130}{BBB456} % room code
 	
 	\newpage
 	\insertpage{2}
+	\text{46}{89}{98}{Faccio cose, vedo gente.\\Lorem ipsum dolor sit amet, consectetur adipi\-scing elit. Mauris elementum vehicula elit, sed congue risus tempus et. Sed convallis turpis.}
 	
 	\newpage
 	\insertpage{3}
+	% place Xs as you see fit, second number is about 119 for yes and 137 for no
+	% checkboxes are about 15 mm apart
+	\text{102}{143}{80}{\Large X}
+	\text{119}{143}{80}{\Large X}
+	\text{134}{143}{80}{\Large X}
+	\text{150}{143}{80}{\Large X}
+	\text{165}{143}{80}{\Large X}
+	\text{181}{143}{80}{\Large X}
+	\text{198}{143}{80}{\Large X}
+	\text{216}{143}{80}{\Large X}
+	\text{232}{143}{80}{\Large X}
+	\text{244}{143}{80}{\Large X}
+	\text{254}{143}{80}{\Large X}
 	
 	\newpage
 	\insertpage{4}
