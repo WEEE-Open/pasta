@@ -12,11 +12,11 @@ un csv con i dati dei lavoratori, e produce `n` file pdf compilati con i dati de
 
 Si può adattare in maniera relativamente facile per compilare altri moduli, modificando `template.tex`.
 
-# Requisiti
+## Requisiti
 
 PHP (qualsiasi versione vagamente recente) e `pdflatex`.
 
-# Installazione
+## Installazione
 
 1. Clonare il repo
 2. Rinominare `template-example.tex` in `template.tex` e modificarlo secondo le proprie esigenze
