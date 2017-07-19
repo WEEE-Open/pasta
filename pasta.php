@@ -31,13 +31,27 @@ $header = array_shift($lines);
 $replace = explode(',', $header);
 foreach($replace as &$value) {
 	$value = '[' . $value . ']';
+	if(strstr($template,$value) === false) {
+		echo "$value not found in template".PHP_EOL;
+		exit(8);
+	}
 }
+$fullname = in_array('[NAME]',$replace) && in_array('[SURNAME]',$replace) && in_array('[ID]',$replace);
 $headercount = count($replace);
 foreach($lines as $lineno => $oneline) {
 	$pieces = explode(',', $oneline);
 	if($headercount !== count($pieces)) {
 		echo 'Field count must match: there are ' . $headercount . ' fields in header and ' . count($pieces) . ' on line ' . ($lineno + 2) .PHP_EOL;
 		exit(7);
+	}
+	if($fullname) {
+		$filename = 'SIR ' . $pieces(array_search('[NAME]', $replace)) . ' ' . $pieces(array_search('[SURNAME]', $replace)) . ' ' . $pieces(array_search('[ID]', $replace)) . '.pdf';
+	} else {
+		$filename = 'SIR ' . $lineno . '.pdf';
+	}
+	if(file_exists($filename)) {
+		echo "File $filename already exists".PHP_EOL;
+		exit(9);
 	}
 }
 
