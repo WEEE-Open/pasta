@@ -39,20 +39,30 @@ foreach($replace as &$value) {
 $fullname = in_array('[NAME]',$replace) && in_array('[SURNAME]',$replace) && in_array('[ID]',$replace);
 $headercount = count($replace);
 foreach($lines as $lineno => $oneline) {
+	$precompilato = $template;
 	$pieces = explode(',', $oneline);
 	if($headercount !== count($pieces)) {
 		echo 'Field count must match: there are ' . $headercount . ' fields in header and ' . count($pieces) . ' on line ' . ($lineno + 2) .PHP_EOL;
 		exit(7);
 	}
 	if($fullname) {
-		$filename = 'SIR ' . $pieces(array_search('[NAME]', $replace)) . ' ' . $pieces(array_search('[SURNAME]', $replace)) . ' ' . $pieces(array_search('[ID]', $replace)) . '.pdf';
+		$filename = 'SIR ' . $pieces[array_search('[NAME]', $replace)] . ' ' . $pieces[array_search('[SURNAME]', $replace)] . ' ' . $pieces[array_search('[ID]', $replace)] . '.tex';
 	} else {
-		$filename = 'SIR ' . $lineno . '.pdf';
+		$filename = 'SIR ' . ($lineno + 1) . '.tex';
 	}
 	if(file_exists($filename)) {
 		echo "File $filename already exists".PHP_EOL;
 		exit(9);
 	}
+	echo "Building $filename...".PHP_EOL;
+	foreach($replace as $key => $placeholder) {
+		$precompilato = str_replace($placeholder, $pieces[$key], $precompilato);
+	}
+	file_put_contents($filename, $precompilato);
+	echo 'Calling pdflatex...' . PHP_EOL;
+	system('pdflatex -interaction=nonstopmode ' . escapeshellarg($filename), $ret);
+	if($ret !== 0) {
+		echo PHP_EOL."Pdflatex failed".PHP_EOL;
+		exit(10);
+	}
 }
-
-#pdflatex -synctex=1 -interaction=nonstopmode "template-example".tex
