@@ -60,8 +60,8 @@ foreach($lines as $lineno => $oneline) {
 	} else {
 		$filename = 'SIR ' . ($lineno + 1);
 	}
-	if(file_exists($filename.'.tex')) {
-		echo "File $filename.tex already exists, skipping".PHP_EOL;
+	if(file_exists(OUTPUT_DIR.DIRECTORY_SEPARATOR.$filename.'.pdf')) {
+		echo "File $filename.pdf already exists, skipping".PHP_EOL;
 		continue;
 		//exit(9);
 	}
