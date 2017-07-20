@@ -67,7 +67,7 @@ foreach($lines as $lineno => $oneline) {
 	}
 	echo "Building $filename.tex...".PHP_EOL;
 	foreach($replace as $key => $placeholder) {
-		$precompilato = str_replace($placeholder, $pieces[$key], $precompilato);
+		$precompilato = str_replace($placeholder, trim($pieces[$key]), $precompilato);
 	}
 	file_put_contents($filename.'.tex', $precompilato);
 	echo 'Calling pdflatex...' . PHP_EOL;
