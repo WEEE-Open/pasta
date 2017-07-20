@@ -1,5 +1,7 @@
 #!/bin/php
 <?php
+define('OUTPUT_DIR', 'sir');
+
 if(!file_exists('template.tex')) {
 	echo 'No template.tex file'.PHP_EOL;
 	exit(1);
@@ -38,6 +40,14 @@ foreach($replace as &$value) {
 }
 $fullname = in_array('[NAME]',$replace) && in_array('[SURNAME]',$replace) && in_array('[ID]',$replace);
 $headercount = count($replace);
+
+if(defined('OUTPUT_DIR') && is_string(OUTPUT_DIR) && strlen(OUTPUT_DIR) > 0) {
+	if((!file_exists(OUTPUT_DIR) || !is_dir(OUTPUT_DIR)) && !mkdir(OUTPUT_DIR)) {
+		echo 'Cannot create create directory'.OUTPUT_DIR.PHP_EOL;
+		exit(10);
+	}
+}
+
 foreach($lines as $lineno => $oneline) {
 	$precompilato = $template;
 	$pieces = explode(',', $oneline);
@@ -46,23 +56,33 @@ foreach($lines as $lineno => $oneline) {
 		exit(7);
 	}
 	if($fullname) {
-		$filename = 'SIR ' . $pieces[array_search('[NAME]', $replace)] . ' ' . $pieces[array_search('[SURNAME]', $replace)] . ' ' . $pieces[array_search('[ID]', $replace)] . '.tex';
+		$filename = 'SIR ' . $pieces[array_search('[NAME]', $replace)] . ' ' . $pieces[array_search('[SURNAME]', $replace)] . ' ' . $pieces[array_search('[ID]', $replace)];
 	} else {
-		$filename = 'SIR ' . ($lineno + 1) . '.tex';
+		$filename = 'SIR ' . ($lineno + 1);
 	}
-	if(file_exists($filename)) {
-		echo "File $filename already exists".PHP_EOL;
-		exit(9);
+	if(file_exists($filename.'.tex')) {
+		echo "File $filename.tex already exists, skipping".PHP_EOL;
+		continue;
+		//exit(9);
 	}
-	echo "Building $filename...".PHP_EOL;
+	echo "Building $filename.tex...".PHP_EOL;
 	foreach($replace as $key => $placeholder) {
 		$precompilato = str_replace($placeholder, $pieces[$key], $precompilato);
 	}
-	file_put_contents($filename, $precompilato);
+	file_put_contents($filename.'.tex', $precompilato);
 	echo 'Calling pdflatex...' . PHP_EOL;
-	system('pdflatex -interaction=nonstopmode ' . escapeshellarg($filename), $ret);
+	system('pdflatex -interaction=nonstopmode ' . escapeshellarg($filename.'.tex'), $ret);
 	if($ret !== 0) {
 		echo PHP_EOL."Pdflatex failed".PHP_EOL;
 		exit(10);
 	}
+	echo 'Moving to output directory...' . PHP_EOL;
+	if(!rename($filename.'.tex', OUTPUT_DIR.DIRECTORY_SEPARATOR.$filename.'.tex') || ! rename($filename.'.pdf', OUTPUT_DIR.DIRECTORY_SEPARATOR.$filename.'.pdf')) {
+		echo PHP_EOL."Cannot move files to ".OUTPUT_DIR.PHP_EOL;
+		exit(11);
+	}
+	
+	echo 'Removing temporary files...' . PHP_EOL;
+	unlink($filename.'.aux');
+	unlink($filename.'.log');
 }
